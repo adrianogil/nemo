@@ -36,10 +36,18 @@ for u in u_paths:
 
     cs_number_cmd = 'find "' + project_path + '" -name "*.cs" | wc -l'
     cs_number_output = subprocess.check_output(cs_number_cmd, shell=True)
+
+    cs_lines_cmd = '(find "' + project_path + '" -name "*.cs" | xargs -I {} cat {}) | wc -l'
+    cs_lines_output = subprocess.check_output(cs_lines_cmd, shell=True)
     
-    print('  Total CS scripts: ' + cs_number_output.strip())
+    print('  Total CS scripts: ' + cs_number_output.strip() + ' ( LOC: ' + \
+        cs_lines_output.strip() + ')')
 
     shader_number_cmd = 'find "' + project_path + '" -name "*.shader" | wc -l'
-    shader_number_output = subprocess.check_output(cs_number_cmd, shell=True)
+    shader_number_output = subprocess.check_output(shader_number_cmd, shell=True)
 
-    print('  Total shader scripts: ' + shader_number_output.strip())
+    shader_lines_cmd = '(find "' + project_path + '" -name "*.shader" | xargs -I {} cat {}) | wc -l'
+    shader_lines_output = subprocess.check_output(shader_lines_cmd, shell=True)
+
+    print('  Total shader scripts: ' + shader_number_output.strip() + ' ( LOC: ' + \
+        shader_lines_output.strip() + ')')
