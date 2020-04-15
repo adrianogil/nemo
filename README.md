@@ -1,20 +1,25 @@
 # nemo
 Tool to find and analyze Unity projects
 
-# Okane
-お金: Personal finance manager via command line
-
+Current version has the following output per project found:
+```
+Project <ProjectName>
+  Path <ProjectPath>
+  Total CS scripts: <Number of csharp scripts> ( LOC: <csharp LOC>)
+  Total shader scripts: <Number of shader scripts> ( LOC: <shader LOC>)
+```
 
 # Command line options
 
-Save a register
-
 ```
-nemo -q <search-query>
+nemo <path>
 ```
 
 ## Planned features
-- Simple search for Unity projects
+- Using a search query
+```
+nemo -q <search-query>
+```
 
 ## Installation
 
