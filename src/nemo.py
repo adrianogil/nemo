@@ -34,6 +34,8 @@ for u in u_paths:
     print('Project ' + project_name)
     print('  Path ' + project_path)
 
+    project_path = os.path.join(project_path, "Assets/")
+
     cs_number_cmd = 'find "' + project_path + '" -name "*.cs" | wc -l'
     cs_number_output = subprocess.check_output(cs_number_cmd, shell=True)
     cs_number_output = cs_number_output.decode("utf8")
@@ -41,7 +43,6 @@ for u in u_paths:
     cs_lines_cmd = '(find "' + project_path + '" -name "*.cs" | xargs -I {} cat {}) | wc -l'
     cs_lines_output = subprocess.check_output(cs_lines_cmd, shell=True)
     cs_lines_output = cs_lines_output.decode("utf8")
-
 
     print('  Total CS scripts: ' + cs_number_output.strip() + ' ( LOC: ' + \
         cs_lines_output.strip() + ')')
