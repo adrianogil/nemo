@@ -16,6 +16,11 @@ nemo <path>
 ```
 
 ## Planned features
+- List all shaders found
+```
+nemo --shaders <project-path>
+```
+
 - Using a search query
 ```
 nemo -q <search-query>
