@@ -56,7 +56,7 @@ def search_projects():
             cs_lines_output = subprocess.check_output(cs_lines_cmd, shell=True)
             cs_lines_output = cs_lines_output.decode("utf8")
 
-            print('  Total CS scripts: ' + cs_number_output.strip() + ' ( LOC: ' + \
+            print('  Total CS scripts: ' + cs_number_output.strip() + ' (LOC: ' + \
                 cs_lines_output.strip() + ')')
 
         if show_shader_files:
@@ -68,8 +68,19 @@ def search_projects():
             shader_lines_output = subprocess.check_output(shader_lines_cmd, shell=True)
             shader_lines_output = shader_lines_output.decode("utf8")
 
-            print('  Total shader scripts: ' + shader_number_output.strip() + ' ( LOC: ' + \
+            print('  Total shader scripts: ' + shader_number_output.strip() + ' (LOC: ' + \
                 shader_lines_output.strip() + ')')
+
+            if shader_flag:
+                shader_files_cmd = 'find "' + project_path + '" -name "*.shader"'
+                shader_files_output = subprocess.check_output(shader_files_cmd, shell=True)
+                shader_files_output = shader_files_output.decode("utf8")
+
+                shader_files = shader_files_output.split("\n")
+
+                for shader_file in shader_files:
+                    shader_name = os.path.basename(shader_file)
+                    print("  - %s" % shader_name)
 
 
 if __name__ == '__main__':
