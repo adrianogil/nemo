@@ -1,12 +1,11 @@
 from pyutils.cli.flags import verify_flag
+from pyutils.cli.clitools import run_cmd
 
 import os
 import fnmatch
 from os.path import join
 
 import sys
-
-import subprocess
 
 
 def search_projects():
@@ -49,32 +48,27 @@ def search_projects():
 
         if show_cs_files:
             cs_number_cmd = 'find "' + project_path + '" -name "*.cs" | wc -l'
-            cs_number_output = subprocess.check_output(cs_number_cmd, shell=True)
-            cs_number_output = cs_number_output.decode("utf8")
+            cs_number_output = run_cmd(cs_number_cmd)
 
             cs_lines_cmd = '(find "' + project_path + '" -name "*.cs" | xargs -I {} cat {}) | wc -l'
-            cs_lines_output = subprocess.check_output(cs_lines_cmd, shell=True)
-            cs_lines_output = cs_lines_output.decode("utf8")
+            cs_lines_output = run_cmd(cs_lines_cmd)
 
             print('  Total CS scripts: ' + cs_number_output.strip() + ' (LOC: ' + \
                 cs_lines_output.strip() + ')')
 
         if show_shader_files:
             shader_number_cmd = 'find "' + project_path + '" -name "*.shader" | wc -l'
-            shader_number_output = subprocess.check_output(shader_number_cmd, shell=True)
-            shader_number_output = shader_number_output.decode("utf8")
+            shader_number_output = run_cmd(shader_number_cmd)
 
             shader_lines_cmd = '(find "' + project_path + '" -name "*.shader" | xargs -I {} cat {}) | wc -l'
-            shader_lines_output = subprocess.check_output(shader_lines_cmd, shell=True)
-            shader_lines_output = shader_lines_output.decode("utf8")
+            shader_lines_output = run_cmd(shader_lines_cmd)
 
             print('  Total shader scripts: ' + shader_number_output.strip() + ' (LOC: ' + \
                 shader_lines_output.strip() + ')')
 
             if shader_flag:
                 shader_files_cmd = 'find "' + project_path + '" -name "*.shader"'
-                shader_files_output = subprocess.check_output(shader_files_cmd, shell=True)
-                shader_files_output = shader_files_output.decode("utf8")
+                shader_files_output = run_cmd(shader_files_cmd)
 
                 shader_files = shader_files_output.split("\n")
 
